@@ -2,9 +2,11 @@ package ServerControllers.gameProtocols.dice;
 
 import com.mongodb.util.JSON;
 import controllers.CharacterController;
+import controllers.LobbyController;
 import controllers.UserController;
 import jdk.nashorn.internal.parser.JSONParser;
 import models.Character;
+import models.Lobby;
 import models.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,19 +26,27 @@ public class AttackRoll {
     public static JSONObject rollDice(JSONObject object){
         JSONArray jsonArray=null;
         String modifier=null;
-        String id_player ;
+        String id_player=null ;
+        String roomName=null;
         try {
             jsonArray = (JSONArray) object.get("DICES");
             modifier = object.get("MODIFIER").toString();
-            id_player = object.get("PLAYER_ID").toString();
+            id_player = object.get("PLAYER_NAME").toString();
+            roomName = object.get("ROOM_NAME").toString();
         }
         catch (Exception e) {
             return  failed();
         }
-        int sum = sumDice(jsonArray);
-        User user = UserController.findUser(id_player);
+        Lobby lobby= LobbyController.findByName(roomName);
+        User user = lobby.findUser(id_player);
         Character character = user.getCharacter();
-
+        int sum=0;
+        try {
+            sum = sumDice(jsonArray);
+        }
+        catch (Exception e){
+            return failed();
+        }
         if(modifier.compareTo("STR")==0){
             sum+=character.getStrength();
         }
@@ -44,7 +54,6 @@ public class AttackRoll {
             sum+=character.getDexterity();
         }
         //ACTION ,
-
         return success(sum);
     }
 
@@ -64,6 +73,7 @@ public class AttackRoll {
         JSONObject object= new JSONObject();
         object.put("PROTOCOL","ACTION_ROLL");
         object.put("DICE_ROLL",sum);
+        object.put("ANSWER","ROLLED SUCCESFULLY");
         object.put("SUCCESS",1);
 
         return object;
@@ -71,6 +81,7 @@ public class AttackRoll {
     static JSONObject failed(){
         JSONObject object= new JSONObject();
         object.put("PROTOCOL","ACTION_ROLL");
+        object.put("ANSWER","EXCEPTION, WRONG INPUT");
         object.put("SUCCESS",0);
         return object;
     }

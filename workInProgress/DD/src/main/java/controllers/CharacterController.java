@@ -29,6 +29,29 @@ public class CharacterController {
         Character warlock = CharacterGenerator.generateWarlock();
         return CharacterDAO.createNewCharacter(warlock);
     }
+    public static Character createCharacter(String name){
+        Character character=null;
+        if(name.compareTo("BARBAR")==0){
+            character= CharacterGenerator.generateBarbarian();
+        }
+        else if(name.compareTo("BARD")==0){
+            character=CharacterGenerator.generateBard();
+        }
+        else if(name.compareTo("CLERIC")==0) {
+            character = CharacterGenerator.generateBard();
+        }
+        else if(name.compareTo("ROGUE")==0){
+            character=CharacterGenerator.generateRogue();
+        }
+        else if(name.compareTo("PALADIN")==0){
+            character=CharacterGenerator.generatePaladin();
+        }
+        else if(name.compareTo("KNIGHT")==0){
+            character=CharacterGenerator.generateKnight();
+        }
+        return  character;
+    }
+
     public static Character findCharacterByIdAndName(ObjectId id, String name){
         return CharacterDAO.findCharacterByIdAndName(id,name);
     }

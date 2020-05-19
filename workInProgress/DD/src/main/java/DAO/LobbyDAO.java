@@ -46,4 +46,13 @@ public class LobbyDAO {
         }
         return lobbies;
     }
+    public static Lobby findByName(String name){
+        Gson gson = new Gson();
+        BasicDBObject query = new BasicDBObject();
+        query.put("name", name);
+        DBObject dbObject = Database.findDocument(collectionName,query);
+
+        Lobby lobby= gson.fromJson(dbObject.toString(),Lobby.class);
+        return lobby;
+    }
 }

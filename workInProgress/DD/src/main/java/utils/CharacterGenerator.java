@@ -152,7 +152,7 @@ public class CharacterGenerator {
         String flaws = "Im horribly jealous of anyone who can outshine my hadiwork. Everywhere I go, Im surrounded by rivals.";
         String featureAndTraits =
                 "Lvl 1 - Fighting Style Two-Weapon Fighting, This allows you to add your modifier for the damage to your bonus off hand attack.\n" +
-                "Lvl 1 - Second Wind, Bonus Action, 1d10+Fighter lvl, Short or Long Rest";
+                        "Lvl 1 - Second Wind, Bonus Action, 1d10+Fighter lvl, Short or Long Rest";
         Character fighter = new Character(
                 "Fighter", "Guild Artisan / Smith", "Halfling, Stout", 0, 11,
                 17, 16, 10, 10, 10, 10, 2, 14, 3,
@@ -207,9 +207,9 @@ public class CharacterGenerator {
     }
     public static Character generateWarlock(){
         SavingThrows warlockSavingThrows = new SavingThrows(-1, -1, 0, 3, 5, 5);
-        Skills warlockSkills = new Skills(1, 3, 5, -1, 3, 3, 3,
-                3, 3, 3, 5, 5, 3, 5, 5, -1,
-                -1, 3);
+        Skills warlockSkills = new Skills(4, 1, 0, 0, 5, 0, 3,
+                5, 0, 3, 0, 1, 5, 3, 0, 4,
+                2, 1);
         OtherProficienciesAndLanguages otherProficienciesAndLanguages = new OtherProficienciesAndLanguages("",
                 "", "", "",
                 "");
@@ -269,5 +269,158 @@ public class CharacterGenerator {
                 equipament, personalityTraits, ideals, bonds, flaws, featureAndTraits);
         return warlock;
     }
+    public static Character generateBard(){
+        SavingThrows bardSavingThrows = new SavingThrows(0, 4, 2, 0, 1, 5);
+        Skills bardSkills = new Skills(1, 3, 5, -1, 3, 3, 3,
+                3, 3, 3, 5, 5, 3, 5, 5, -1,
+                -1, 3);
+        OtherProficienciesAndLanguages otherProficienciesAndLanguages = new OtherProficienciesAndLanguages("Common, Elven, Halfling",
+                "Light Armor", "Simple Weapons\n" +
+                "Hand Crossbows, Longsword, Rapiers , Shortswords", "Lute, bagpipe, flute, cowbell",
+                "Instrument Proficiencies");
+        List<AttackAndSpell> attackAndSpellList = new ArrayList<AttackAndSpell>();
+        attackAndSpellList.add(new AttackAndSpell("Rapier attack",4,3));
+        attackAndSpellList.add(new AttackAndSpell("Dagger attack",4,3));
+        String equipament = "Rapier,  2lb, Piercing, Finesse\n" +
+                "\n" +
+                "Dagger, 1 lb, Finesse, Light,  20/60\n" +
+                "\n" +
+                "Leather Armor, 11+Dex Mod, 10 lbs.\n" +
+                "Lute, bagpipe, flute, cowbell \n"+
+                "Disguise Kit\n" +
+                "Backpack\n" +
+                "Bedroll\n" +
+                "2 x Costumes\n" +
+                "5 x Candles\n" +
+                "5 x Rations\n" +
+                "Waterskin Disguise Kit";
+
+        String personalityTraits = "I love a good insult, even one directed at me.\n" +
+                "\n" +
+                "I'll settle for nothing less than perfection.";
+
+        String ideals = "Beauty - When I perform, I make the world better than it was.";
+        String bonds = "I want to be famous, whatever it takes.";
+        String flaws = "I'll do anything to win fame and renown.";
+        String featureAndTraits = "Lvl 1, Bardic Inspiration, Bonus Action, You can cast this on another creature and it has to use it within 10 minutes. That player can add an additional 1d6 to an attack, save or skill check roll. Once this is used the player loses it.\n " +
+                "The bard can use this feature the amount of times to the Bard's Cha modifier.\n" +
+                "Long Rest to recover.\n" +
+                "(5th 1d8), (10 1d10), (15 1d12)\n" +
+                "Lvl 1 Class Skill Proficiencies: Deception, Insight, Medicine, -Entertainer background also gives Acrobatics and Performance. Race (Half Elf) gives you proficiency in another 2 skills, Intimidation and Sleight of Hand. ";
+        Character bard = new Character(
+                "bard", "Entertainer / Singer", "Half-Elf", 0, 10,
+                14, 14, 10, 12, 17, 11, 2, 13, 2,
+                30, 10, attackAndSpellList, bardSavingThrows, bardSkills, otherProficienciesAndLanguages,
+                equipament, personalityTraits, ideals, bonds, flaws, featureAndTraits);
+        return bard;
+    }
+
+    public static Character generateRogue(){
+        SavingThrows rogueSavingThrows = new SavingThrows(1, 5, 0, 3, 1, 2);
+        Skills rogueSkills = new Skills(3, 1, 1, 3, 4, 1, 1,
+                2, 3, 1, 1, 3, 2, 2, 1, 5,
+                5, 1);
+        OtherProficienciesAndLanguages otherProficienciesAndLanguages = new OtherProficienciesAndLanguages("Common, Elvish and Undercommon",
+                "Light Armor", "Simple weapons, Hand crossbows, longswords, rapiers, shortswords, shortbows and longbows.", "Disguise kit and Forgery kit.",
+                "Proficient w/ Thieves' Tools");
+        List<AttackAndSpell> attackAndSpellList = new ArrayList<AttackAndSpell>();
+        attackAndSpellList.add(new AttackAndSpell("Sword attack",5,3));
+        attackAndSpellList.add(new AttackAndSpell("Shortblow attack",5,3));
+        String equipament = "Shortsword, Piercing, Light, Finesse, 2 lb, One-Handed.\n" +
+                "\n" +
+                "Shortbow, Piercing, 2 lb, 80/32\n"+
+                "Leather Armour 11+Dex AC 10 lbs\n" +
+                "Backpack\n" +
+                "1000 x Ball Bearings\n" +
+                "10 ft String\n" +
+                "Bell\n" +
+                "5 x Candles\n" +
+                "Crowbar\n" +
+                "Hammer\n" +
+                "10 x Pitons\n" +
+                "Hooded Lantern\n" +
+                "2 x Flasks of Oil\n" +
+                "5 x Rations\n" +
+                "Tinderbox\n" +
+                "Waterskin\n" +
+                "Bedroll\n" +
+                "Quiver\n" +
+                "20 x Arrows\n" +
+                "Fine clothing Disguise kit\n" +
+                "Wheigted Dice\n" +
+                "Belt Pouch\n" +
+                "Theives' Tools";
+
+        String personalityTraits = "Favourite Scheme; \"I cheat at games of chance\".\n" +
+                "Flattery is my preferred trick for getting what I want.\n" +
+                "I lie about almost everything, even when there's no good reason to.";
+
+        String ideals = "Friendship. Materials come and go. Bonds of friendship last forever. (Good)";
+        String bonds = "I swindeled and ruined a person who didn't deserve it. I seek to atone for my misdeeds but might never be able to forgive myself";
+        String flaws = "I hate to admit it and will hate myself for it, but i'll run and preserve my own hide if the going gets tough";
+        String featureAndTraits = "Expertise; Theives' Tools and Sleight of Hand,Sneak Attack";
+        Character rogue = new Character(
+                "rogue", "Charlatan", "Half-Elf", 0, 12,
+                16, 10, 12, 12, 14, 3, 2, 14, 3,
+                30, 8, attackAndSpellList, rogueSavingThrows, rogueSkills, otherProficienciesAndLanguages,
+                equipament, personalityTraits, ideals, bonds, flaws, featureAndTraits);
+        return rogue;
+    }
+    public static Character generateKnight(){
+        SavingThrows knightSavingThrows = new SavingThrows(2, 3, 4, -1, 1, 2);
+        Skills knightSkills = new Skills(3, 1, -1, 2, 2, 1, 1,
+                2, -1, 1, 1, 3, 2, 4, -1, 3,
+                3, 1);
+        OtherProficienciesAndLanguages otherProficienciesAndLanguages = new OtherProficienciesAndLanguages("common & 1 additional",
+                "all armor & shields", "simple & martial weapons", "1 gaming set",
+                "athletics & perception");
+        List<AttackAndSpell> attackAndSpellList = new ArrayList<AttackAndSpell>();
+        attackAndSpellList.add(new AttackAndSpell("Rapier attack",5,3));
+        attackAndSpellList.add(new AttackAndSpell("Longbow attack",5,3));
+        String equipament = "Background Equipment:\n" +
+                "set of fine clothes\n" +
+                "signet ring\n" +
+                "scroll of pedigree\n" +
+                "purse\n" +
+                "\n" +
+                "Class Equipment:\n" +
+                "scale mail\n" +
+                "longbow\n" +
+                "arrows x20\n" +
+                "rapier\n" +
+                "shield\n" +
+                "explorer's pack: backpack, bedroll, mess kit, 10 torches, 10 days of rations, waterskin, 50 ft of hempen rope";
+
+
+        String personalityTraits = "I don’t like to get my hands dirty, and I won’t be caught dead in unsuitable accommodations.\n" +
+                "\n" +
+                "My favor, once lost, is lost forever.";
+
+        String ideals = "Responsibility. It is my duty to respect the authority of those above me, just as those below me must respect mine. (Lawful)";
+
+        String bonds = "My loyalty to my sovereign is unwavering.";
+        String flaws = "I too often hear veiled insults and threats in every word addressed to me, and I’m quick to anger.";
+        String featureAndTraits = "Human Variant Traits:\n" +
+                "ASI: +1 to DEX & CHR\n" +
+                "Feat: Inspiring Leader: up to 6 friendly creatures within 30 ft that can hear or see you gain temp hit points equal to your level + CHR mod\n" +
+                "- gain this bonus only once per short or long rest\n" +
+                "\n" +
+                "Fighter Class Features:\n" +
+                "1st lvl: Fighting Style (Defense)\n" +
+                "- +1 to AC if wearing armor\n" +
+                "\n" +
+                "1st lvl: Second Wind: - as a bonus action, regain hit points equal to 1d10+fighter level\n" +
+                "- 1 use per short or long rest";
+        Character knight = new Character(
+                "knight", "Noble (Knight)", "Human (Variant)", 0, 10,
+                16, 14, 8, 12, 14, 13, 2, 19, 3,
+                30, 12, attackAndSpellList, knightSavingThrows, knightSkills, otherProficienciesAndLanguages,
+                equipament, personalityTraits, ideals, bonds, flaws, featureAndTraits);
+        return knight;
+    }
+
+
+
+
 
 }

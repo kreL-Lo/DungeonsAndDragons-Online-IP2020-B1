@@ -16,45 +16,29 @@ import java.util.List;
 public class StartGame {
 
     public static JSONObject start(JSONObject object) {
-        String roomId;
-        String playerName;
+        String roomName=null;
+        String playerName=null;
         try {
-            roomId = object.get("ROOM_ID").toString();
+            roomName = object.get("ROOM_NAME").toString();
             playerName = object.get("PLAYER_NAME").toString();
         }catch (Exception e){
             return exceptionHandler();
         }
 
-        ObjectId id = new ObjectId(roomId.toString());
-        Lobby l = LobbyController.findById(id);
 
-        l.getUserList();
-        if(l.getDungeonMaster()==null){
-            return noDungeonMaster();
-        }
-        else if(l.getDungeonMaster().compareTo(playerName)!=0) {
-            return invalidDungeonMaster();
-        }
+        Lobby l = LobbyController.findByName(roomName);
+        l.setDungeonMaster(playerName);
         List<User> playerList = l.getUserList();
         for(User p : playerList){
-            User user = UserController.findUser(p.getUsername());
-            ObjectId userId;
-            try {
-                userId = parseCharacter(user.getCharacterName());
-                if(userId == null){
-                    return nullError();
-                }
-            }
-            catch(Exception e){
-                return nullError();
-            }
-            Character c = CharacterController.findCharacterByIdAndName(userId,p.getUsername());
-            user.setCharacter(c);
-            UserController.updateUser(user);
+
+            Character c = CharacterController.createCharacter(p.getCharacterName());
+            p.setCharacter(c);
         }
         DM dm = new DM();
         dm.setUsername(l.getDungeonMaster());
-        DMDAO.create(dm);
+        l.setDm(dm);
+        LobbyController.update(l);
+
         JSONObject json = new JSONObject();
         json.put("PROTOCOL", "START_GAME");
         json.put("SUCCESS", 1);
@@ -114,6 +98,7 @@ public class StartGame {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("PROTOCOL", "START_GAME");
         jsonObject.put("SUCCESS", 0);
+        jsonObject.put("ANSWER", "EXCEPTION ");
         return jsonObject;
     }
 }

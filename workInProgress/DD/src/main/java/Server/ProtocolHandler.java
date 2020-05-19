@@ -26,8 +26,10 @@ public class ProtocolHandler {
             return StartGame.start(object);
         }else if(protocol.compareTo("SET_CHARACTER")==0) {
             return SetCharacter.setCharacter(object);
-        }else if(protocol.compareTo("ACTION_DICE")==0){
+        }else if(protocol.compareTo("ACTION_ROLL")==0){
             return AttackRoll.rollDice(object);
+        }else if(protocol.compareTo("LEAVE_LOBBY")==0){
+            return LeaveLobby.leaveLobby(object);
         }
         return FailureResponse.unknown();
     }

@@ -18,4 +18,8 @@ public class LobbyController {
         return LobbyDAO.findById(id);
     }
     public static List<Lobby> getAllLobbies(){return LobbyDAO.getAllLobbies();}
+
+    public static Lobby findByName(String name) {
+        return LobbyDAO.findByName(name);
+    }
 }

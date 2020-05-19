@@ -5,10 +5,19 @@ import java.util.List;
 public class Lobby {
     String name;
     String id;
+    DM dm;
     String dungeonMaster;
     int maxPlayersLimit;
     int nrPlayers = 0;
     List<User> userList= new ArrayList<User>();
+
+    public void setDm(DM dm) {
+        this.dm = dm;
+    }
+
+    public DM getDm() {
+        return dm;
+    }
 
     public String getName() {
         return name;
@@ -56,5 +65,17 @@ public class Lobby {
 
     public int getNrPlayers() {
         return nrPlayers;
+    }
+
+    public User findUser(String name){
+        for(User user : userList){
+            if(user.getUsername().compareTo(name)==0){
+                return user;
+            }
+        }
+        return null;
+    }
+    public void removeUser(User user){
+        userList.remove(user);
     }
 }

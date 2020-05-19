@@ -15,6 +15,8 @@ public class Database {
 
         MongoClient mongoClient = new MongoClient(uri);
         database = mongoClient.getDB("test");
+        database.getCollection("Lobby").drop();
+        database.getCollection("User").drop();
     }
 
     public static ObjectId createDocument(String collectionName, DBObject document){
